@@ -21,18 +21,6 @@
 					"defaultDiagram": true,
 					"ownedViews": [
 						{
-							"_type": "UMLTextView",
-							"_id": "AAAAAAGO+Dl9Tw8t4hA=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;16;0",
-							"left": 1139,
-							"top": 324,
-							"width": 230,
-							"height": 238
-						},
-						{
 							"_type": "UMLClassView",
 							"_id": "AAAAAAGO+D2WKw+ctH8=",
 							"_parent": {
@@ -2609,9 +2597,9 @@
 										"$ref": "AAAAAAGO+ETtaRJy9PM="
 									},
 									"font": "Arial;16;0",
-									"left": 620,
+									"left": 619,
 									"top": 700,
-									"width": 6.2265625,
+									"width": 8,
 									"height": 16,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -3241,8 +3229,8 @@
 											},
 											"visible": false,
 											"font": "Arial;16;0",
-											"left": 388,
-											"top": 660,
+											"left": 476,
+											"top": 658,
 											"height": 16
 										},
 										{
@@ -3252,8 +3240,8 @@
 												"$ref": "AAAAAAGO+EghzSWhuH0="
 											},
 											"font": "Arial;16;1",
-											"left": 1186,
-											"top": 1212,
+											"left": 1230,
+											"top": 1211,
 											"width": 57.015625,
 											"height": 16,
 											"text": "Faculty"
@@ -3266,8 +3254,8 @@
 											},
 											"visible": false,
 											"font": "Arial;16;0",
-											"left": 388,
-											"top": 660,
+											"left": 476,
+											"top": 658,
 											"width": 90.6796875,
 											"height": 16,
 											"text": "(from Model)"
@@ -3280,15 +3268,15 @@
 											},
 											"visible": false,
 											"font": "Arial;16;0",
-											"left": 388,
-											"top": 660,
+											"left": 476,
+											"top": 658,
 											"height": 16,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;16;0",
-									"left": 1181,
-									"top": 1205,
+									"left": 1225,
+									"top": 1204,
 									"width": 67.015625,
 									"height": 28,
 									"stereotypeLabel": {
@@ -3314,8 +3302,8 @@
 										"$ref": "AAAAAAGO+EghzSWejJ8="
 									},
 									"font": "Arial;16;0",
-									"left": 1181,
-									"top": 1233,
+									"left": 1225,
+									"top": 1232,
 									"width": 67.015625,
 									"height": 10
 								},
@@ -3329,8 +3317,8 @@
 										"$ref": "AAAAAAGO+EghzSWejJ8="
 									},
 									"font": "Arial;16;0",
-									"left": 1181,
-									"top": 1243,
+									"left": 1225,
+									"top": 1242,
 									"width": 67.015625,
 									"height": 10
 								},
@@ -3345,8 +3333,8 @@
 									},
 									"visible": false,
 									"font": "Arial;16;0",
-									"left": 194,
-									"top": 330,
+									"left": 238,
+									"top": 329,
 									"width": 10,
 									"height": 10
 								},
@@ -3361,16 +3349,16 @@
 									},
 									"visible": false,
 									"font": "Arial;16;0",
-									"left": 194,
-									"top": 330,
+									"left": 238,
+									"top": 329,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;16;0",
 							"containerChangeable": true,
-							"left": 1181,
-							"top": 1205,
+							"left": 1225,
+							"top": 1204,
 							"width": 66.015625,
 							"height": 48,
 							"nameCompartment": {
@@ -3505,7 +3493,7 @@
 									"visible": false,
 									"font": "Arial;16;0",
 									"left": 1175,
-									"top": 1177,
+									"top": 1196,
 									"height": 16,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -3526,7 +3514,7 @@
 									"visible": null,
 									"font": "Arial;16;0",
 									"left": 1160,
-									"top": 1177,
+									"top": 1196,
 									"height": 16,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -3547,7 +3535,7 @@
 									"visible": false,
 									"font": "Arial;16;0",
 									"left": 1204,
-									"top": 1178,
+									"top": 1197,
 									"height": 16,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -3565,7 +3553,7 @@
 								"$ref": "AAAAAAGO+EghzSWgpEE="
 							},
 							"lineStyle": 2,
-							"points": "1190:1205;1190:1167",
+							"points": "1225:1205;1190:1205;1190:1167",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGO+EhSGChSEag="
@@ -6412,7 +6400,8 @@
 								"$ref": "AAAAAAGO+EIjuxE60Zs="
 							},
 							"name": "dueDate",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
