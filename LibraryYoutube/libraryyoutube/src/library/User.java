@@ -1,9 +1,9 @@
 package library;
 
 public abstract class User {
-    protected String name;
-    protected String email;
-    protected String phoneNumber;
+    private String name;
+    private String email;
+    private String phoneNumber;
 
     public User() {
 
