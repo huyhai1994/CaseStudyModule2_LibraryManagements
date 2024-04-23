@@ -10,4 +10,15 @@ public class Admin extends User {
         super(name, email, phoneNumber);
     }
 
+    @Override
+    public void menu() {
+        System.out.println("1. View Books");
+        System.out.println("2. Add Books");
+        System.out.println("3. Delete Books");
+        System.out.println("4. Search Books");
+        System.out.println("5. Delete all data");
+        System.out.println("6. View Orders");
+        System.out.println("7. Exit");
+
+    }
 }

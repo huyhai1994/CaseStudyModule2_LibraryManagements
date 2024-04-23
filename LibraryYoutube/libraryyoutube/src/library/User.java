@@ -1,8 +1,6 @@
 package library;
 
-import java.util.Objects;
-
-public class User {
+public abstract class User {
     protected String name;
     protected String email;
     protected String phoneNumber;
@@ -21,6 +19,8 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+
+    public abstract void menu();
 
     public String getName() {
         return this.name;
