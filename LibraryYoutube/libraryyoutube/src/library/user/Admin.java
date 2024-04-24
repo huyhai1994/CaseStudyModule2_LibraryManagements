@@ -1,6 +1,20 @@
-package library;
+package library.user;
+
+import java.util.Scanner;
+
+import library.DataBase;
+import library.iooperation.AddBook;
+import library.iooperation.DeleteAllData;
+import library.iooperation.DeleteBook;
+import library.iooperation.Exit;
+import library.iooperation.IOOperation;
+import library.iooperation.Search;
+import library.iooperation.ViewBooks;
+import library.iooperation.ViewOrders;
+import library.user.User;
 
 public class Admin extends User {
+    protected IOOperation[] operations;
 
     public Admin(String name) {
         super(name);
@@ -29,7 +43,7 @@ public class Admin extends User {
     }
 
     @Override
-    public void menu() {
+    public void menu(DataBase database, User user) {
         System.out.println("1. View Books");
         System.out.println("2. Add Books");
         System.out.println("3. Delete Books");
@@ -37,5 +51,10 @@ public class Admin extends User {
         System.out.println("5. Delete all data");
         System.out.println("6. View Orders");
         System.out.println("7. Exit");
+        Scanner scanner = new Scanner(System.in);
+        int adminChoice = scanner.nextInt();
+        this.operations[adminChoice - 1].oper(database, user);
+        scanner.close();
+
     }
 }

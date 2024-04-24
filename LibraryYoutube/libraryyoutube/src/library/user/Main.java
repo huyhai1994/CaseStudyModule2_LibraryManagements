@@ -1,7 +1,6 @@
 package library;
 
 import java.util.Scanner;
-
 class Main {
     static Scanner scanner;
     static DataBase database;
@@ -39,10 +38,10 @@ class Main {
         System.out.println("Enter email: ");
         String email = scanner.next();
         int locationOfMatchedUser = database.login(phoneNumber, email);
-        boolean isUserFound =  locationOfMatchedUser != -1;
+        boolean isUserFound = locationOfMatchedUser != -1;
         if (isUserFound) {
-            User user = database.getUser( locationOfMatchedUser);
-            user.menu();
+            User user = database.getUser(locationOfMatchedUser);
+            user.menu(database, user);
         } else {
             System.out.println("User not found!!!");
         }
@@ -66,7 +65,7 @@ class Main {
         }
         database.addUser(user);
         System.out.println("User created successfully!");
-        user.menu();
+        user.menu(database, user);
     }
 
 }

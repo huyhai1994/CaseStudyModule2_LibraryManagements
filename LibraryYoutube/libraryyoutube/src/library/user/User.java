@@ -1,4 +1,7 @@
-package library;
+package library.user;
+
+import library.iooperation.DataBase;
+import library.iooperation.IOOperation;
 
 public abstract class User {
     private String name;
@@ -21,7 +24,7 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public abstract void menu();
+    public abstract void menu(DataBase database, User user);
 
     public String getName() {
         return this.name;
