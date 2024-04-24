@@ -10,7 +10,7 @@ class Main {
         System.out.println("\nWelcome to Library Management System\n");
         database = new DataBase();
         int options;
-        boolean isUserDontWantToExit;
+        boolean isUserNotWantToExit;
         do {
             System.out.println(" 0. Exit\n 1.Login\n 2. New User");
             scanner = new Scanner(System.in);
@@ -20,7 +20,7 @@ class Main {
                     login();
                     break;
                 case 2:
-                    newuser();
+                    newUser();
                     break;
                 case 0:
                     System.out.println("Exit Library Management System !!!");
@@ -28,8 +28,8 @@ class Main {
                 default:
                     System.out.println("Error!");
             }
-            isUserDontWantToExit = options != 0;
-        } while (isUserDontWantToExit);
+            isUserNotWantToExit = options != 0;
+        } while (isUserNotWantToExit);
     }
 
     private static void login() {
@@ -38,17 +38,17 @@ class Main {
         String phoneNumber = scanner.next();
         System.out.println("Enter email: ");
         String email = scanner.next();
-        int locationOfMatchingUser = database.login(phoneNumber, email);
-        boolean isUserfound = locationOfMatchingUser != -1;
-        if (isUserfound) {
-            User user = database.getUser(locationOfMatchingUser);
+        int locationOfMatchedUser = database.login(phoneNumber, email);
+        boolean isUserFound =  locationOfMatchedUser != -1;
+        if (isUserFound) {
+            User user = database.getUser( locationOfMatchedUser);
             user.menu();
         } else {
             System.out.println("User not found!!!");
         }
     }
 
-    private static void newuser() {
+    private static void newUser() {
         System.out.println("Enter name: ");
         String name = scanner.next();
         System.out.println("Enter Phone number: ");
