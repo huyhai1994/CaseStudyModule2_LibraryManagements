@@ -1,7 +1,7 @@
-package library;
-
 import java.util.Scanner;
-class Main {
+
+public class Main {
+
     static Scanner scanner;
     static DataBase database;
 

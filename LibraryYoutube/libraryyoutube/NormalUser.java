@@ -1,16 +1,4 @@
-package library.user;
-
 import java.util.Scanner;
-
-import library.iooperation.BorrowBook;
-import library.iooperation.CalculateFine;
-import library.iooperation.DataBase;
-import library.iooperation.Exit;
-import library.iooperation.IOOperation;
-import library.iooperation.PlaceOrder;
-import library.iooperation.ReturnBook;
-import library.iooperation.Search;
-import library.iooperation.ViewBooks;
 
 public class NormalUser extends User {
     protected IOOperation[] operations;

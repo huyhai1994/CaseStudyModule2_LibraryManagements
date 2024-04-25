@@ -1,17 +1,5 @@
-package library.user;
 
 import java.util.Scanner;
-
-import library.DataBase;
-import library.iooperation.AddBook;
-import library.iooperation.DeleteAllData;
-import library.iooperation.DeleteBook;
-import library.iooperation.Exit;
-import library.iooperation.IOOperation;
-import library.iooperation.Search;
-import library.iooperation.ViewBooks;
-import library.iooperation.ViewOrders;
-import library.user.User;
 
 public class Admin extends User {
     protected IOOperation[] operations;

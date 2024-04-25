@@ -1,8 +1,3 @@
-package library.user;
-
-import library.iooperation.DataBase;
-import library.iooperation.IOOperation;
-
 public abstract class User {
     private String name;
     private String email;

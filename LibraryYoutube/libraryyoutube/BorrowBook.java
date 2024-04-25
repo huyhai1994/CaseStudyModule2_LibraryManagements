@@ -1,8 +1,5 @@
-package library.iooperation;
 
-import library.user.User;
-
-public class DeleteAllData implements IOOperation {
+public class BorrowBook implements IOOperation {
 
     @Override
     public void oper(DataBase database, User user) {

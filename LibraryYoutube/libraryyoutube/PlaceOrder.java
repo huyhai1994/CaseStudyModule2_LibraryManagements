@@ -1,8 +1,5 @@
-package library.iooperation;
 
-import library.user.User;
-
-public class Exit implements IOOperation {
+public class PlaceOrder implements IOOperation {
 
     @Override
     public void oper(DataBase database, User user) {

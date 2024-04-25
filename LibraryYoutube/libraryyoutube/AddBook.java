@@ -1,6 +1,3 @@
-package library.iooperation;
-
-import library.user.User;
 
 public class AddBook implements IOOperation {
 

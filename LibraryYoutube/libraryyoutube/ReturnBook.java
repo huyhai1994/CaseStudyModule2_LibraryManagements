@@ -1,8 +1,6 @@
-package library.iooperation;
 
-import library.user.User;
 
-public class Search implements IOOperation {
+public class ReturnBook implements IOOperation {
 
     @Override
     public void oper(DataBase database, User user) {
