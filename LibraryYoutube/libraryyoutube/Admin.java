@@ -45,4 +45,12 @@ public class Admin extends User {
         scanner.close();
 
     }
+
+    @Override
+    public String toString() {
+        return getName() + "<N/>" +
+                getEmail() + "<N/>" +
+                getPhoneNumber() + "<N/>" +
+                "Admin";
+    }
 }

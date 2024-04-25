@@ -45,4 +45,12 @@ public class NormalUser extends User {
         this.operations[normalUserChoice - 1].oper(database, user);
         scanner.close();
     }
+
+    @Override
+    public String toString() {
+        return getName() + "<N/>" +
+                getEmail() + "<N/>" +
+                getPhoneNumber() + "<N/>" +
+                "NormalUser";
+    }
 }

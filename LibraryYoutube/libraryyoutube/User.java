@@ -21,6 +21,9 @@ public abstract class User {
 
     public abstract void menu(DataBase database, User user);
 
+    @Override
+    public abstract String toString();
+
     public String getName() {
         return this.name;
     }

@@ -1,27 +1,24 @@
 
-
 public class Book {
     private String bookTitle;
     private String author;
     private String publisher;
     private String collectionLocation;
-    private String borrowingStatus;
-    private int copiesForSale;
+    private String quantity;
+    private int price;
     private int copiesForBorrowing;
 
     public Book() {
     }
 
-    public Book(String bookTitle, String author,
-            String publisher, String collectionLocation,
-            String borrowingStatus, int copiesForSale, int copiesForBorrowing) {
-
+    public Book(String bookTitle, String author, String publisher, String collectionLocation, String quantity,
+            int price, int copiesForBorrowing) {
         this.bookTitle = bookTitle;
         this.author = author;
         this.publisher = publisher;
         this.collectionLocation = collectionLocation;
-        this.borrowingStatus = borrowingStatus;
-        this.copiesForSale = copiesForSale;
+        this.quantity = quantity;
+        this.price = price;
         this.copiesForBorrowing = copiesForBorrowing;
     }
 
@@ -57,20 +54,20 @@ public class Book {
         this.collectionLocation = collectionLocation;
     }
 
-    public String getBorrowingStatus() {
-        return this.borrowingStatus;
+    public String getQuantity() {
+        return this.quantity;
     }
 
-    public void setBorrowingStatus(String borrowingStatus) {
-        this.borrowingStatus = borrowingStatus;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
-    public int getCopiesForSale() {
-        return this.copiesForSale;
+    public int getPrice() {
+        return this.price;
     }
 
-    public void setCopiesForSale(int copiesForSale) {
-        this.copiesForSale = copiesForSale;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getCopiesForBorrowing() {
@@ -81,4 +78,51 @@ public class Book {
         this.copiesForBorrowing = copiesForBorrowing;
     }
 
+    public Book bookTitle(String bookTitle) {
+        setBookTitle(bookTitle);
+        return this;
+    }
+
+    public Book author(String author) {
+        setAuthor(author);
+        return this;
+    }
+
+    public Book publisher(String publisher) {
+        setPublisher(publisher);
+        return this;
+    }
+
+    public Book collectionLocation(String collectionLocation) {
+        setCollectionLocation(collectionLocation);
+        return this;
+    }
+
+    public Book quantity(String quantity) {
+        setQuantity(quantity);
+        return this;
+    }
+
+    public Book price(int price) {
+        setPrice(price);
+        return this;
+    }
+
+    public Book copiesForBorrowing(int copiesForBorrowing) {
+        setCopiesForBorrowing(copiesForBorrowing);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " Book Title    : " + getBookTitle() + "'" +
+                " Book Author   :" + getAuthor() + "'" +
+                " Book Publisher: " + getPublisher() + "'" +
+                " Book collection Location :" + getCollectionLocation() + "'" +
+                " Quantity      :'" + getQuantity() + "'" +
+                " Price: '" + getPrice() + "'" +
+                ", Borrowing Copies: " + getCopiesForBorrowing() + "'" +
+                "}";
+    }
 }
