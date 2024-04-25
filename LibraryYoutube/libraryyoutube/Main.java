@@ -1,13 +1,17 @@
 import java.util.Scanner;
 
 public class Main {
-
     static Scanner scanner;
     static DataBase database;
 
     public static void main(String[] args) {
         System.out.println("\nWelcome to Library Management System\n");
-        database = new DataBase();
+        try {
+            database = new DataBase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         int options;
         boolean isUserNotWantToExit;
         do {
@@ -27,6 +31,7 @@ public class Main {
                 default:
                     System.out.println("Error!");
             }
+            
             isUserNotWantToExit = options != 0;
         } while (isUserNotWantToExit);
     }

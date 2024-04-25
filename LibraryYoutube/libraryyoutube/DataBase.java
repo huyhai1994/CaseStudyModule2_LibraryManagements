@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.io.FileWriter;
 
 public class DataBase {
 
@@ -9,21 +12,45 @@ public class DataBase {
     private ArrayList<String> usernamesList = new ArrayList<String>();
     private ArrayList<Book> bookList = new ArrayList<Book>();
     private ArrayList<String> booksNameList = new ArrayList<String>();
-    private File usersFile = new File(ClassLoader.getSystemResource("Books.txt").getFile());
-    private File booksFile = new File(ClassLoader.getSystemResource("Users.txt").getFile());
+    // private FileWriter usersFile = new FileWriter("Users.txt");
+    // private FileWriter booksFile = new FileWriter("Books.txt");
+    private FileWriter usersFile;
+    private FileWriter booksFile;
 
     public DataBase() {
-        if (!usersFile.exists()) {
-            usersFile.mkdirs();
+        // if (!usersFile.exists()) {
+        //     try {
+        //         usersFile.createNewFile();
+        //     } catch (IOException e) {
+        //         e.printStackTrace();
+        //     }
+        // }
+        // if (!booksFile.exists()) {
+        //     try {
+        //         booksFile.createNewFile();
+        //     } catch (IOException e) {
+        //         e.printStackTrace();
+        //     }
+        // }
+
+        try {
+            usersFile = new FileWriter("Users.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (!booksFile.exists()) {
-            booksFile.mkdirs();
+        try {
+            booksFile = new FileWriter("Books.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        getUsers();
     }
 
     public void addUser(User user) {
         usersList.add(user);
         usernamesList.add(user.getName());
+        saveUsers();
     }
 
     public int login(String phoneNumber, String email) {
@@ -45,22 +72,50 @@ public class DataBase {
     public void addBook(Book book) {
         bookList.add(book);
         booksNameList.add(book.getBookTitle());
+        
     }
-    private void getUsers(){
+
+    private void getUsers() {
         String text = " ";
-        try{
+        try {
             BufferedReader br1 = new BufferedReader(new FileReader("Users.txt"));
+            String s1;
+            while ((s1 = br1.readLine()) != null) {
+                text = text + s1;
+            }
             br1.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.toString());
         }
+        if (!text.matches(" ") || !text.isEmpty()) {
+            String[] a1 = text.split("<NewUser/>");
+            for (String s : a1) {
+                String[] a2 = s.split("<N/>");
+                if (a2[3].matches("Admin")) {
+                    User user = new Admin(a2[0], a2[1], a2[2]);
+                    usersList.add(user);
+                    usernamesList.add(user.getName());
+                } else {
+                    User user = new NormalUser(a2[0], a2[1], a2[2]);
+                    usersList.add(user);
+                    usernamesList.add(user.getName());
+                }
+            }
+        }
     }
-    
-    private void saveUsers(){
-        String text1 = " ";
-        for (User user : usersList){
-            // text1 = text1 + usersList.get
 
+    private void saveUsers() {
+        String text1 = " ";
+        for (User user : usersList) {
+            text1 = text1 + user.toString() + "<NewUser/>\n";
+        }
+        try {
+            PrintWriter pw = new PrintWriter(usersFile);
+            pw.print(text1);
+            pw.close();
+            System.out.println("New-User saved successfully!");
+        } catch (Exception e) {
+            System.err.println(e.toString());
         }
     }
 }
