@@ -3,28 +3,40 @@ package library.book;
 public class Book {
     private String title;
     private String author;
-    private String pulisher;
+    private String publisher;
     private String collectionLocation;
     private String borrowingStatus;
     private int quatity;
     private double price;
     private int borrowingCopies;
 
-
     public Book() {
     }
 
-    public Book(String title, String author, String pulisher, String collectionLocation, String borrowingStatus, int quatity, double price, int borrowingCopies) {
+    public Book(String title, String author, String pulisher, String collectionLocation, String borrowingStatus,
+            int quatity, double price, int borrowingCopies) {
         this.title = title;
         this.author = author;
-        this.pulisher = pulisher;
+        this.publisher = pulisher;
         this.collectionLocation = collectionLocation;
         this.borrowingStatus = borrowingStatus;
         this.quatity = quatity;
         this.price = price;
         this.borrowingCopies = borrowingCopies;
     }
-    
+
+    @Override
+    public String toString() {
+        return this.getTitle() + "|" +
+                this.getAuthor() + "|" +
+                this.getPublisher() + "|" +
+                this.getCollectionLocation() + "|" +
+                this.getBorrowingStatus() + "|" +
+                this.getQuatity() + "|" +
+                this.getPrice() + "|" +
+                this.getBorrowingCopies();
+    }
+
     public String getTitle() {
         return this.title;
     }
@@ -41,12 +53,12 @@ public class Book {
         this.author = author;
     }
 
-    public String getPulisher() {
-        return this.pulisher;
+    public String getPublisher() {
+        return this.publisher;
     }
 
-    public void setPulisher(String pulisher) {
-        this.pulisher = pulisher;
+    public void setPulisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public String getCollectionLocation() {
@@ -89,5 +101,4 @@ public class Book {
         this.borrowingCopies = borrowingCopies;
     }
 
-    
 }

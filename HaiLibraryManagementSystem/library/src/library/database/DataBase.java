@@ -8,22 +8,34 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import library.user.*;
+import library.book.*;;
 
 public class DataBase {
-    public static String USERS_FILE_PATH = "src/library/database/users.txt";
+    public static final String USERS_FILE_PATH = "src/library/database/users.txt";
+    public static final String BOOKS_FILE_PATH = "src/library/database/books.txt";
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<String> usernames = new ArrayList<String>();
+    private ArrayList<Book> books = new ArrayList<Book>();
+    private ArrayList<String> booknames = new ArrayList<>();
     private File usersFile;
+    private File booksFile;
 
     public DataBase() {
         try {
             usersFile = new File(USERS_FILE_PATH);
+            booksFile = new File(BOOKS_FILE_PATH);
             boolean usersFileNotExist = !usersFile.exists();
+            boolean booksFileNotExist = !booksFile.exists();
             if (usersFileNotExist) {
                 usersFile.createNewFile();
             }
+            if(booksFileNotExist){
+                booksFile.createNewFile();
+            }
             this.readUserInformationsFromFile();
+            this.readBookInformationsFromFile();
             this.showUsers();
+            this.showBooks();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -64,6 +76,14 @@ public class DataBase {
         }
     }
 
+    public void showBooks() {
+        System.out.println(
+                "title| Author | Publisher | Collection Location | Borrowing Status | Quatity | Price | Borrowing Copies");
+        for(Book book : books){
+            book.toString();
+        }
+    }
+
     private void readUserInformationsFromFile() {
         try {
             FileReader fileReader = new FileReader(USERS_FILE_PATH);
@@ -78,12 +98,12 @@ public class DataBase {
                     String roleUser = txt[3];
                     if (roleUser.equalsIgnoreCase("admin")) {
                         User userExtractFromFile = new Admin(nameUser, phoneUser, emailUser, roleUser);
-                        this.users.add(userExtractFromFile); 
-                    } else if(roleUser.equalsIgnoreCase("normaluser")){
+                        this.users.add(userExtractFromFile);
+                    } else if (roleUser.equalsIgnoreCase("normaluser")) {
                         User userExtractFromFile = new NormalUser(nameUser, phoneUser, emailUser, roleUser);
                         this.users.add(userExtractFromFile);
                     }
-                    
+
                 }
                 bufferedReader.close();
             } catch (Exception e) {
@@ -96,7 +116,7 @@ public class DataBase {
     }
 
     private void writeUserInformationsToFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(USERS_FILE_PATH);
+        FileWriter fileWriter = new FileWriter(BOOKS_FILE_PATH);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         try {
             for (User user : users) {
@@ -111,6 +131,66 @@ public class DataBase {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void readBookInformationsFromFile() {
+        try {
+            FileReader fileReader = new FileReader(BOOKS_FILE_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            try {
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] txt = line.split(",");
+                    String title = txt[0];
+                    String author = txt[1];
+                    String publisher = txt[2];
+                    String collectionLocation = txt[3];
+                    String borrowingStatus = txt[4];
+                    String quatity = txt[5];
+                    String price = txt[6];
+                    String borrowingCopies = txt[7];
+                    Book bookExtractFromFile = new Book(title, author, publisher,
+                            collectionLocation, borrowingStatus, Integer.parseInt(quatity),
+                            Double.parseDouble(price), Integer.parseInt(borrowingCopies));
+                    bookExtractFromFile.toString();
+                    this.books.add(bookExtractFromFile);
+                }
+                bufferedReader.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void writeBookInformationsToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(BOOKS_FILE_PATH);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try {
+            for (Book book : books) {
+                String line = book.getTitle() + "," +
+                        book.getAuthor() + "," +
+                        book.getPublisher() + "," +
+                        book.getCollectionLocation() + "," +
+                        book.getBorrowingStatus() + "," +
+                        book.getQuatity() + "," +
+                        book.getPrice() + "," +
+                        book.getBorrowingCopies();
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void addBook(Book book) throws IOException {
+        books.add(book);
+        booknames.add(book.getTitle());
+        this.writeBookInformationsToFile();
     }
 
 }
