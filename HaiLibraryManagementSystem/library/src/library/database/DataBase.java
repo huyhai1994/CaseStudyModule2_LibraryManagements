@@ -34,8 +34,6 @@ public class DataBase {
             }
             this.readUserInformationsFromFile();
             this.readBookInformationsFromFile();
-            this.showUsers();
-            this.showBooks();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -116,7 +114,7 @@ public class DataBase {
     }
 
     private void writeUserInformationsToFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(BOOKS_FILE_PATH);
+        FileWriter fileWriter = new FileWriter(USERS_FILE_PATH);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         try {
             for (User user : users) {

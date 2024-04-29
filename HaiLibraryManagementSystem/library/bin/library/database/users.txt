@@ -1,1 +1,2 @@
 hai,0392260046,nguyenhuyhai926@gmail.com,admin
+Nam,nguyennam92@gmail.com,0586465664,normalUser

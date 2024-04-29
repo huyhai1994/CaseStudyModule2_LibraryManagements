@@ -35,7 +35,7 @@ public class AddBook implements IOOperation{
             e.printStackTrace();
         }
         scanner.close();
-
         System.out.println("Them sach thanh cong!!!");
+        user.menu(dataBase, user);
     }
 }

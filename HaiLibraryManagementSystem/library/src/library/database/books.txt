@@ -1,3 +1,4 @@
-BiQuyetHanhPhucTrongCongViec,AnnieMcKee,TongHopHCM,KT,ConKho,13,108000.0,10
-dasd,dasdas,dadawd,ff,dadaw,12,213123.0,2
-dwqweq,ttwew,aweawe,dawdaw,c,190,1.2312E7,34
+BiQuyetHanhPhucTrongCongViec,AnnieMcKee,TongHopHCM,KT,ConKho,12,108000.0,3
+VoSiDao,InazoNitobe,DanTri,VH,ConKho,12,109000.0,1
+SuDungTriTueCuaBan,LeHuyLam,TongHopHCM,KT,ConKho,2,136000.0,1
+SuDungTriNhoCuaBan,LeHuyLam,TongHopHCM,KT,conkho,3,177000.0,1
