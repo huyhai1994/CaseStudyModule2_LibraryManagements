@@ -80,7 +80,7 @@ public class DataBase {
         System.out.println(
                 "title| Author | Publisher | Collection Location | Borrowing Status | Quatity | Price | Borrowing Copies");
         for(Book book : books){
-            book.toString();
+            System.out.println(book);
         }
     }
 
