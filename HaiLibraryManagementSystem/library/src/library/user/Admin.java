@@ -2,6 +2,7 @@ package library.user;
 
 import java.util.Scanner;
 
+import library.database.DataBase;
 import library.iooperation.*;
 
 public class Admin extends User {
@@ -41,7 +42,7 @@ public class Admin extends User {
     }
 
     @Override
-    public void menu() {
+    public void menu(DataBase dataBase, User user) {
         System.out.println("Here is Admin menu");
         System.out.println("-------------------");
         System.out.println("1. View Books");
@@ -54,7 +55,7 @@ public class Admin extends User {
 
         Scanner scanner = new Scanner(System.in);
         int adminchoise = scanner.nextInt();
-        this.operations[adminchoise - 1].operation();
+        this.operations[adminchoise - 1].operation(dataBase,user);
         scanner.close();
 
     }

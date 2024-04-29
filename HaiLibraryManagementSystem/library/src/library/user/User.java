@@ -1,5 +1,7 @@
 package library.user;
 
+import library.database.DataBase;
+
 public abstract class User{
     protected String name;
     protected String email;
@@ -47,7 +49,7 @@ public abstract class User{
    @Override
     public abstract String toString();
 
-    public abstract void menu();
+    public abstract void menu(DataBase dataBase, User user);
 
     public String getPassword() {
         throw new UnsupportedOperationException("Unimplemented method 'getPassword'");

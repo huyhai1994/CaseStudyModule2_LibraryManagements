@@ -49,10 +49,11 @@ public class Main {
             System.out.println("Enter email: ");
             String email = scanner.next();
             int indexOfUser = database.checkLogin(phoneNumber, email);
-            if (indexOfUser != -1) {
+            boolean isUserExist = indexOfUser!=-1;
+            if (isUserExist) {
                 User user = database.getUser(indexOfUser);
                 System.out.println("Welcome user + " + user.getName());
-                user.menu();
+                user.menu(database,user);
 
             } else {
                 System.out.println("User not exit!!!");
@@ -65,6 +66,7 @@ public class Main {
     }
 
     private static void newUser() throws IOException {
+        User user;
         System.out.println("Enter Name: ");
         String name = scanner.next();
         System.out.println("Enter phone number: ");
@@ -75,15 +77,16 @@ public class Main {
         int userChoose = scanner.nextInt();
         boolean isUserIsAdmin = userChoose == 1;
         boolean isUserIsNormalUser = userChoose == 2;
-        User user;
+        
         if (isUserIsAdmin) {
             user = new Admin(name, email, phoneNumber, ADMIN);
             database.addUser(user);
+            user.menu(database,user);
         } else if (isUserIsNormalUser) {
             user = new NormalUser(name, email, phoneNumber, NORMAL_USER);
             database.addUser(user);
+            user.menu(database,user);
         }
-
         System.out.println("Account created succesfully!!!");
         return;
     }
