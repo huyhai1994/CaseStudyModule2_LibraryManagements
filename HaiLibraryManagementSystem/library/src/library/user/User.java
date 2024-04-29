@@ -1,7 +1,7 @@
 package library.user;
 import java.util.Objects;
 
-public class User {
+public abstract class User{
     protected String name;
     protected String email;
     protected String phoneNumber;
@@ -72,12 +72,11 @@ public class User {
     }
 
     @Override
-    public String toString() {
-        return "{" +
-            " name='" + getName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", phoneNumber='" + getPhoneNumber() + "'" +
-            "}";
+    public abstract String toString();
+
+    public String getPassword() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
     }
     
     
