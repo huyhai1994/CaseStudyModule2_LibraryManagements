@@ -11,7 +11,11 @@ public class Admin extends User {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Unimplemented method 'toString'");
+        return this.getName() + " " +
+                this.getEmail() + " " +
+                this.getPhoneNumber() + " " +
+                this.role;
+
     }
 
     @Override
@@ -24,6 +28,8 @@ public class Admin extends User {
         System.out.println("4. Search Books");
         System.out.println("5. Delete all data");
         System.out.println("6. View orders");
+        System.out.println("7. Exit");
+
     }
 
 }

@@ -16,9 +16,11 @@ public class Main {
     static final String NORMAL_USER = "normalUser";
 
     public static void main(String[] args) throws Exception {
+        printWelcome();
         int userOption = setOptions();
             database = new DataBase();
-            printWelcome();
+            database.showUsers();
+            
         do {
            
             switch (userOption) {
@@ -32,11 +34,13 @@ public class Main {
                     System.out.println("Error!");
                     break;
             }
+            userOption = setOptions();
         } while (userOption != 0);
     }
 
     public static void printWelcome() {
-        System.out.println("Welcome to Library Management System");
+        
+        System.out.println("\n------Welcome to Library Management System---------\n");
     }
 
     private static void login() {
@@ -80,6 +84,7 @@ public class Main {
         }
        
         System.out.println("Account created succesfully!!!");
+        return;
     }
 
     public static int setOptions() {
