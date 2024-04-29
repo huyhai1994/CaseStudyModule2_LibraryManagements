@@ -43,15 +43,15 @@ public class Admin extends User {
 
     @Override
     public void menu(DataBase dataBase, User user) {
-        System.out.println("Here is Admin menu");
+        System.out.println("Day la menu cua Admin");
         System.out.println("-------------------");
-        System.out.println("1. View Books");
-        System.out.println("2. Add Books");
-        System.out.println("3. Delete Books");
-        System.out.println("4. Search Books");
-        System.out.println("5. Delete all data");
-        System.out.println("6. View orders");
-        System.out.println("7. Exit");
+        System.out.println("1. Hien Thi Sach");
+        System.out.println("2. Them Sach");
+        System.out.println("3. Xoa Sach");
+        System.out.println("4. Tim Sach");
+        System.out.println("5. Xoa Tat Ca Du Lieu");
+        System.out.println("6. Xem Giao Dich");
+        System.out.println("7. Thoat");
 
         Scanner scanner = new Scanner(System.in);
         int adminchoise = scanner.nextInt();

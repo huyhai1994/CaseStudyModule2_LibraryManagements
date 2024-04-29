@@ -16,8 +16,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         database = new DataBase();
         printWelcome();
-        int userOption = setOptions();
+       int userOption;
         do {
+            userOption = setOptions();
             switch (userOption) {
                 case (ONE):
                     login();
@@ -25,11 +26,8 @@ public class Main {
                 case (TWO):
                     newUser();
                     break;
-                default:
-                    System.out.println("Error!");
-                    break;
             }
-            userOption = setOptions();
+            // userOption = setOptions();
         } while (userOption != 0);
     }
 
@@ -65,7 +63,7 @@ public class Main {
         String phoneNumber = scanner.next();
         System.out.println("Nhap email: ");
         String email = scanner.next();
-        System.out.println("1. Admin\n2. Tai Khoan Binh Thuong");
+        System.out.println("1. Admin\n2. Tai Khoan Binh Thuong\n");
         int userChoose = scanner.nextInt();
         boolean isUserIsAdmin = userChoose == 1;
         boolean isUserIsNormalUser = userChoose == 2;
@@ -83,7 +81,7 @@ public class Main {
     }
 
     public static int setOptions() {
-        System.out.println("1. Dang Nhap \n 2. Tao Tai Khoan Moi\n");
+        System.out.println("1. Dang Nhap \n 2. Tao Tai Khoan Moi\nNhan 0 de thoat\n");
         scanner = new Scanner(System.in);
         int options = scanner.nextInt();
         return options;
