@@ -10,7 +10,7 @@ public abstract class User{
         this.name = name;
     }
 
-    public User(String name, String email, String phoneNumber, String role) {
+    public User(String name, String phoneNumber, String email, String role) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;

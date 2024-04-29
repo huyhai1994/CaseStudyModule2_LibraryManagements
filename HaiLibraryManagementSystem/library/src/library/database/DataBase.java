@@ -16,12 +16,8 @@ public class DataBase {
     private File usersFile;
 
     public DataBase() {
-
         try {
             usersFile = new File(USERS_FILE_PATH);
-            System.out.println("User file exit: " + usersFile.exists());
-            System.out.println("User file can read: " + usersFile.canRead());
-            System.out.println("User file can write: " + usersFile.canWrite());
             boolean usersFileNotExist = !usersFile.exists();
             if (usersFileNotExist) {
                 usersFile.createNewFile();
@@ -43,10 +39,10 @@ public class DataBase {
         int flag = -1;
         int indexOfUser = flag;
         for (User user : users) {
-            System.out.println(user.getPhoneNumber());
-            System.out.println(user.getEmail());
-            boolean isInputPhoneNumberMatchedWithDataBaseUser = (user.getPhoneNumber()).equalsIgnoreCase(phoneNumber);
-            boolean isInputEmailMatchedWithDataBaseUser = (user.getEmail()).equalsIgnoreCase(email);
+            String userPhoneNumber = user.getPhoneNumber();
+            String userEmail = user.getEmail();
+            boolean isInputPhoneNumberMatchedWithDataBaseUser = userPhoneNumber.equalsIgnoreCase(phoneNumber);
+            boolean isInputEmailMatchedWithDataBaseUser = userEmail.equalsIgnoreCase(email);
 
             if (isInputEmailMatchedWithDataBaseUser &&
                     isInputPhoneNumberMatchedWithDataBaseUser) {
@@ -62,6 +58,7 @@ public class DataBase {
     }
 
     public void showUsers() {
+        System.out.println("Name | PhoneNumber | Email | Role");
         for (User user : users) {
             System.out.println(user);
         }
@@ -79,8 +76,14 @@ public class DataBase {
                     String phoneUser = txt[1];
                     String emailUser = txt[2];
                     String roleUser = txt[3];
-                    User userExtractFromFile = new NormalUser(nameUser, phoneUser, emailUser, roleUser);
-                    this.users.add(userExtractFromFile);
+                    if (roleUser.equalsIgnoreCase("admin")) {
+                        User userExtractFromFile = new Admin(nameUser, phoneUser, emailUser, roleUser);
+                        this.users.add(userExtractFromFile); 
+                    } else if(roleUser.equalsIgnoreCase("normaluser")){
+                        User userExtractFromFile = new NormalUser(nameUser, phoneUser, emailUser, roleUser);
+                        this.users.add(userExtractFromFile);
+                    }
+                    
                 }
                 bufferedReader.close();
             } catch (Exception e) {

@@ -4,7 +4,6 @@ public class NormalUser extends User {
 
     public NormalUser(String name) {
         super(name);
-        // TODO Auto-generated constructor stub
     }
 
     public NormalUser(String name, String email, String phoneNumber, String role) {
@@ -13,10 +12,11 @@ public class NormalUser extends User {
 
     @Override
     public String toString() {
-        return this.getName() + " " + 
-                this.getEmail() + " "+
-                this.getPhoneNumber()+" "+
-                this.role;
+        return this.getName() + "|" +
+                this.getEmail() + "|" +
+                this.getPhoneNumber() + "|" +
+                this.getRole();
+
     }
 
     @Override

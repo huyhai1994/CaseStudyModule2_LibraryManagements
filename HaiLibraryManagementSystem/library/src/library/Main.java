@@ -19,7 +19,6 @@ public class Main {
         printWelcome();
         int userOption = setOptions();
         database = new DataBase();
-        database.showUsers();
 
         do {
 
