@@ -44,20 +44,6 @@ public abstract class User{
         this.phoneNumber = phoneNumber;
     }
 
-    public User name(String name) {
-        setName(name);
-        return this;
-    }
-
-    public User email(String email) {
-        setEmail(email);
-        return this;
-    }
-
-    public User phoneNumber(String phoneNumber) {
-        setPhoneNumber(phoneNumber);
-        return this;
-    }
    @Override
     public abstract String toString();
 

@@ -18,11 +18,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         printWelcome();
         int userOption = setOptions();
-            database = new DataBase();
-            database.showUsers();
-            
+        database = new DataBase();
+        database.showUsers();
+
         do {
-           
+
             switch (userOption) {
                 case (ONE):
                     login();
@@ -39,7 +39,7 @@ public class Main {
     }
 
     public static void printWelcome() {
-        
+
         System.out.println("\n------Welcome to Library Management System---------\n");
     }
 
@@ -52,14 +52,16 @@ public class Main {
             int indexOfUser = database.checkLogin(phoneNumber, email);
             if (indexOfUser != -1) {
                 User user = database.getUser(indexOfUser);
-                System.out.println("Welcome user + "+user.getName());
+                System.out.println("Welcome user + " + user.getName());
                 user.menu();
-            
+
             } else {
+                System.out.println("User not exit!!!");
+
                 return;
             }
         } catch (Exception e) {
-            System.out.println("User not exit!!!");
+
         }
     }
 
@@ -82,7 +84,7 @@ public class Main {
             user = new NormalUser(name, email, phoneNumber, NORMAL_USER);
             database.addUser(user);
         }
-       
+
         System.out.println("Account created succesfully!!!");
         return;
     }

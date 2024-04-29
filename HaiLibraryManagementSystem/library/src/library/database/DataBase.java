@@ -45,8 +45,8 @@ public class DataBase {
         for (User user : users) {
             System.out.println(user.getPhoneNumber());
             System.out.println(user.getEmail());
-            boolean isInputPhoneNumberMatchedWithDataBaseUser = (user.getPhoneNumber()).matches(phoneNumber);
-            boolean isInputEmailMatchedWithDataBaseUser = (user.getEmail()).matches(email);
+            boolean isInputPhoneNumberMatchedWithDataBaseUser = (user.getPhoneNumber()).equalsIgnoreCase(phoneNumber);
+            boolean isInputEmailMatchedWithDataBaseUser = (user.getEmail()).equalsIgnoreCase(email);
 
             if (isInputEmailMatchedWithDataBaseUser &&
                     isInputPhoneNumberMatchedWithDataBaseUser) {
