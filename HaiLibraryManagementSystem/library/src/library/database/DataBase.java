@@ -29,7 +29,7 @@ public class DataBase {
             if (usersFileNotExist) {
                 usersFile.createNewFile();
             }
-            if(booksFileNotExist){
+            if (booksFileNotExist) {
                 booksFile.createNewFile();
             }
             this.readUserInformationsFromFile();
@@ -78,8 +78,8 @@ public class DataBase {
 
     public void showBooks() {
         System.out.println(
-                "title| Author | Publisher | Collection Location | Borrowing Status | Quatity | Price | Borrowing Copies");
-        for(Book book : books){
+                "      Tieu De    |  Tac Gia      |     NXB   | Vi Tri | TT | S.Luong | Gia | SLMuon");
+        for (Book book : books) {
             System.out.println(book);
         }
     }
@@ -140,18 +140,7 @@ public class DataBase {
             String line;
             try {
                 while ((line = bufferedReader.readLine()) != null) {
-                    String[] txt = line.split(",");
-                    String title = txt[0];
-                    String author = txt[1];
-                    String publisher = txt[2];
-                    String collectionLocation = txt[3];
-                    String borrowingStatus = txt[4];
-                    String quatity = txt[5];
-                    String price = txt[6];
-                    String borrowingCopies = txt[7];
-                    Book bookExtractFromFile = new Book(title, author, publisher,
-                            collectionLocation, borrowingStatus, Integer.parseInt(quatity),
-                            Double.parseDouble(price), Integer.parseInt(borrowingCopies));
+                    Book bookExtractFromFile = parseBook(line);
                     bookExtractFromFile.toString();
                     this.books.add(bookExtractFromFile);
                 }
@@ -163,6 +152,22 @@ public class DataBase {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private Book parseBook(String line) {
+        String[] text = line.split(",");
+        String title = text[0];
+        String author = text[1];
+        String publisher = text[2];
+        String collectionLocation = text[3];
+        String borrowingStatus = text[4];
+        String quatity = text[5];
+        String price = text[6];
+        String borrowingCopies = text[7];
+        Book bookExtractFromFile = new Book(title, author, publisher,
+                collectionLocation, borrowingStatus, Integer.parseInt(quatity),
+                Double.parseDouble(price), Integer.parseInt(borrowingCopies));
+        return bookExtractFromFile;
     }
 
     private void writeBookInformationsToFile() throws IOException {
@@ -192,5 +197,4 @@ public class DataBase {
         booknames.add(book.getTitle());
         this.writeBookInformationsToFile();
     }
-
 }
