@@ -1,9 +1,3 @@
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
-An Uong Noi Cuoi,Tran Huyen An,NXB tre,VH,true,10,58000.0,2
+BiQuyetHanhPhucTrongCongViec,AnnieMcKee,TongHopHCM,KT,ConKho,13,108000.0,10
+dasd,dasdas,dadawd,ff,dadaw,12,213123.0,2
+dwqweq,ttwew,aweawe,dawdaw,c,190,1.2312E7,34
