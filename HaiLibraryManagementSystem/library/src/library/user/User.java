@@ -1,19 +1,23 @@
 package library.user;
-import java.util.Objects;
 
 public abstract class User{
     protected String name;
     protected String email;
     protected String phoneNumber;
+    protected String role;
 
     public User(String name) {
         this.name = name;
     }
 
-    public User(String name, String email, String phoneNumber) {
+    public User(String name, String email, String phoneNumber, String role) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
+    }
+    public String getRole(){
+        return this.role;
     }
 
     public String getName() {
@@ -54,28 +58,12 @@ public abstract class User{
         setPhoneNumber(phoneNumber);
         return this;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof User)) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, email, phoneNumber);
-    }
-
-    @Override
+   @Override
     public abstract String toString();
 
+    public abstract void menu();
+
     public String getPassword() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
     }
     

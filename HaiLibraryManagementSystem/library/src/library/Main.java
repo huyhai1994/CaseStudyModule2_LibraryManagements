@@ -12,13 +12,15 @@ public class Main {
     static DataBase database;
     static final int ONE = 1;
     static final int TWO = 2;
+    static final String ADMIN = "admin";
+    static final String NORMAL_USER = "normalUser";
 
     public static void main(String[] args) throws Exception {
         int userOption = setOptions();
-        database = new DataBase();
-        
-        do {
+            database = new DataBase();
             printWelcome();
+        do {
+           
             switch (userOption) {
                 case (ONE):
                     login();
@@ -46,6 +48,9 @@ public class Main {
             int indexOfUser = database.checkLogin(phoneNumber, email);
             if (indexOfUser != -1) {
                 User user = database.getUser(indexOfUser);
+                System.out.println("Welcome user + "+user.getName());
+                user.menu();
+            
             } else {
                 return;
             }
@@ -67,14 +72,14 @@ public class Main {
         boolean isUserIsNormalUser = userChoose == 2;
         User user;
         if (isUserIsAdmin) {
-            user = new Admin(name, email, phoneNumber);
+            user = new Admin(name, email, phoneNumber, ADMIN);
             database.addUser(user);
         } else if (isUserIsNormalUser) {
-            user = new NormalUser(name, email, phoneNumber);
+            user = new NormalUser(name, email, phoneNumber, NORMAL_USER);
             database.addUser(user);
         }
+       
         System.out.println("Account created succesfully!!!");
-
     }
 
     public static int setOptions() {
