@@ -114,6 +114,15 @@ public class DataBase {
         }
         return null;
     }
+    public int getBookIndex(String bookTitle){
+        int index = -1;
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(bookTitle)) {
+                index  = books.indexOf(book);
+            }
+        }
+        return index;
+    }
 
     public int getIndexOfBook(String bookName) {
         int index = -1;
