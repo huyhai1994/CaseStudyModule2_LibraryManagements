@@ -14,7 +14,11 @@ public class Exit implements IOOperation {
         boolean isUserAgree = userChoise == 1;
         boolean isUserDisagree = userChoise == 2;
         if (isUserAgree) {
-            scanner.close();
+            try {
+             scanner.close();   
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         } else if (isUserDisagree) {
             user.menu(dataBase, user);
         }

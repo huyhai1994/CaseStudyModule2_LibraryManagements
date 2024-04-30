@@ -65,11 +65,11 @@ public class Main {
         boolean isUserIsNormalUser = userChoose == 2;
 
         if (isUserIsAdmin) {
-            user = new Admin(name, email, phoneNumber, ADMIN);
+            user = new Admin(name, phoneNumber, email, ADMIN);
             database.addUser(user);
             user.menu(database, user);
         } else if (isUserIsNormalUser) {
-            user = new NormalUser(name, email, phoneNumber, NORMAL_USER);
+            user = new NormalUser(name,phoneNumber, email, NORMAL_USER);
             database.addUser(user);
             user.menu(database, user);
         }

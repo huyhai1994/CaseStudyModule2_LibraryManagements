@@ -14,8 +14,8 @@ public abstract class User{
 
     public User(String name, String phoneNumber, String email, String role) {
         this.name = name;
-        this.email = email;
         this.phoneNumber = phoneNumber;
+        this.email = email;
         this.role = role;
     }
     public String getRole(){

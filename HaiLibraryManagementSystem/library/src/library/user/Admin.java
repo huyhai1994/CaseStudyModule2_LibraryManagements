@@ -18,8 +18,8 @@ public class Admin extends User {
         };
     }
 
-    public Admin(String name, String email, String phoneNumber, String role) {
-        super(name, email, phoneNumber, role);
+    public Admin(String name, String phoneNumber, String email, String role) {
+        super(name, phoneNumber, email, role);
         this.operations = new IOOperation[] {
                 new ViewBook(),
                 new AddBook(),
