@@ -2,4 +2,4 @@ BiQuyetHanhPhucTrongCongViec,AnnieMcKee,TongHopHCM,KT,ConKho,12,108000.0,3
 VoSiDao,InazoNitobe,DanTri,VH,ConKho,12,109000.0,1
 SuDungTriTueCuaBan,LeHuyLam,TongHopHCM,KT,ConKho,2,136000.0,1
 SuDungTriNhoCuaBan,LeHuyLam,TongHopHCM,KT,conkho,3,177000.0,1
-Ketoan,TG,NXD,d,d,12,1333333.0,12
+PhaKen,TieuDa,ThanhNien,KNS,ConKho,12,110000.0,1

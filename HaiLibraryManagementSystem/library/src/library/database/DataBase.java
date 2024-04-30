@@ -78,6 +78,9 @@ public class DataBase {
     public ArrayList<Book> getAllBooks() {
         return this.books;
     }
+    public  Book getBook(int index){
+        return this.books.get(index);
+    }
 
     public int getIndexOfBook(String bookName) {
         int index = -1;

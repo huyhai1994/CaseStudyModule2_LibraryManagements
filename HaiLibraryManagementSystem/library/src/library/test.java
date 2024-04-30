@@ -10,9 +10,9 @@ public class test {
         System.out.println(" book file can write = " + file.canWrite());
         System.out.println(" book file can read = " + file.canRead());
         DataBase dataBase = new DataBase();
-        dataBase.getAllBooks();
-        dataBase.showBooks();
-        dataBase.deleteBook(5);
-        dataBase.showBooks();
+        // dataBase.getAllBooks();
+        // dataBase.showBooks();
+        // dataBase.deleteBook(5);
+        // dataBase.showBooks();
     }
 }

@@ -36,7 +36,6 @@ public class Main {
     }
 
     private static void login() {
-        try {
             System.out.println("Moi nhap so dien thoai: ");
             String phoneNumber = scanner.next();
             System.out.println("Moi nhap email: ");
@@ -50,9 +49,6 @@ public class Main {
             } else {
                 System.out.println("Tai khoan khong ton tai!!!");
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     private static void newUser() throws IOException {
