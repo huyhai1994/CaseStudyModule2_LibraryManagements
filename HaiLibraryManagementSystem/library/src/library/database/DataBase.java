@@ -7,33 +7,46 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import library.user.*;
-import library.book.*;
+
+import library.user.Admin;
+import library.user.NormalUser;
+import library.user.User;
+import library.book.Book;
+import library.order.Order;
 
 public class DataBase {
     public static final String USERS_FILE_PATH = "src/library/database/users.txt";
     public static final String BOOKS_FILE_PATH = "src/library/database/books.txt";
+    public static final String ORDERS_FILE_PATH = "src/library/database/orders.txt";
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<String> usernames = new ArrayList<String>();
     private ArrayList<Book> books = new ArrayList<Book>();
     private ArrayList<String> booknames = new ArrayList<String>();
+    private ArrayList<Order> orders = new ArrayList<Order>();
     private File usersFile;
     private File booksFile;
+    private File ordersFile;
 
     public DataBase() {
         try {
             usersFile = new File(USERS_FILE_PATH);
             booksFile = new File(BOOKS_FILE_PATH);
+            ordersFile = new File(ORDERS_FILE_PATH);
             boolean usersFileNotExist = !usersFile.exists();
             boolean booksFileNotExist = !booksFile.exists();
+            boolean ordersFileNotExist = !ordersFile.exists();
             if (usersFileNotExist) {
                 usersFile.createNewFile();
             }
             if (booksFileNotExist) {
                 booksFile.createNewFile();
             }
+            if (ordersFileNotExist) {
+                booksFile.createNewFile();
+            }
             this.readUserInformationsFromFile();
             this.readBookInformationsFromFile();
+            this.readOrderInformationsFromFile();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -72,7 +85,6 @@ public class DataBase {
         for (User user : users) {
             System.out.println(user);
         }
-
     }
 
     public ArrayList<Book> getAllBooks() {
@@ -103,22 +115,38 @@ public class DataBase {
             e.printStackTrace();
         }
     }
-    public void deleteAllData(){
-        if(usersFile.exists()){
-            try{
+
+    public void deleteAllData() {
+        if (usersFile.exists()) {
+            try {
                 usersFile.delete();
-                usersFile.createNewFile();
-            } catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
         if (booksFile.exists()) {
-            try{
+            try {
                 booksFile.delete();
-                booksFile.createNewFile();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+        }
+        if (ordersFile.exists()){
+            try{
+                ordersFile.delete();
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    public void createNewDataFile(){
+        try {
+            usersFile.createNewFile();
+            booksFile.createNewFile();
+            ordersFile.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -244,5 +272,52 @@ public class DataBase {
         this.books.add(book);
         this.booknames.add(book.getTitle());
         this.writeBookInformationsToFile();
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public void writeOrderInformationToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(ORDERS_FILE_PATH);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try {
+            for (Order order : orders) {
+                String line = order.getBook() + "," +
+                        order.getUser() + "," +
+                        order.getPrice() + "," +
+                        order.getQuatity();
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void readOrderInformationsFromFile() {
+        // try {
+        // FileReader fileReader = new FileReader(ORDERS_FILE_PATH);
+        // BufferedReader bufferedReader = new BufferedReader(fileReader);
+        // String line;
+        // try {
+        // while ((line = bufferedReader.readLine()) != null) {
+        // String[] txt = line.split(",");
+        // String book= txt[0];
+        // String user = txt[1];
+        // String price= txt[2];
+        // String quatity = txt[3];
+        // Order orderExtractFromFile = new Order(book,user,price,quatity);
+        // this.orders.add(orderExtractFromFile);
+        // }
+        // bufferedReader.close();
+        // } catch (Exception e) {
+        // System.out.println(e.getMessage());
+        // }
+
+        // } catch (IOException e) {
+        // System.out.println(e.getMessage());
+        // }
     }
 }
