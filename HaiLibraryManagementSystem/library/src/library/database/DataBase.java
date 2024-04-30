@@ -40,8 +40,8 @@ public class DataBase {
     }
 
     public void addUser(User user) throws IOException {
-        users.add(user);
-        usernames.add(user.getName());
+        this.users.add(user);
+        this.usernames.add(user.getName());
         this.writeUserInformationsToFile();
     }
 
@@ -64,7 +64,7 @@ public class DataBase {
     }
 
     public User getUser(int indexOfUser) {
-        return users.get(indexOfUser);
+        return this.users.get(indexOfUser);
     }
 
     public void showUsers() {
@@ -76,7 +76,7 @@ public class DataBase {
     }
 
     public ArrayList<Book> getAllBooks() {
-        return books;
+        return this.books;
     }
 
     public int getIndexOfBook(String bookName) {
@@ -91,12 +91,8 @@ public class DataBase {
     }
 
     public void deleteBook(int index) {
-        System.out.println("Vi tri cua sach " + index);
-        System.out.println("Dang xoa sach...");
-        books.remove(index);
-        // booknames.remove(index);
-        System.out.println("da xoa khoi danh sach");
-        showBooks();
+        this.books.remove(index);
+        this.booknames.remove(index);
         try {
             this.writeBookInformationsToFile();
         } catch (IOException e) {
@@ -127,6 +123,7 @@ public class DataBase {
                     if (roleUser.equalsIgnoreCase("admin")) {
                         User userExtractFromFile = new Admin(nameUser, phoneUser, emailUser, roleUser);
                         this.users.add(userExtractFromFile);
+                        this.usernames.add(userExtractFromFile.getName());
                     } else if (roleUser.equalsIgnoreCase("normaluser")) {
                         User userExtractFromFile = new NormalUser(nameUser, phoneUser, emailUser, roleUser);
                         this.users.add(userExtractFromFile);
@@ -171,6 +168,7 @@ public class DataBase {
                     Book bookExtractFromFile = parseBook(line);
                     bookExtractFromFile.toString();
                     this.books.add(bookExtractFromFile);
+                    this.booknames.add(bookExtractFromFile.getTitle());
                 }
                 bufferedReader.close();
             } catch (Exception e) {
@@ -221,8 +219,8 @@ public class DataBase {
     }
 
     public void addBook(Book book) throws IOException {
-        books.add(book);
-        booknames.add(book.getTitle());
+        this.books.add(book);
+        this.booknames.add(book.getTitle());
         this.writeBookInformationsToFile();
     }
 }

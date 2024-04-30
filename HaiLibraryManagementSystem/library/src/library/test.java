@@ -12,8 +12,7 @@ public class test {
         DataBase dataBase = new DataBase();
         dataBase.getAllBooks();
         dataBase.showBooks();
-        dataBase.deleteBook(4);
+        dataBase.deleteBook(5);
         dataBase.showBooks();
-
     }
 }

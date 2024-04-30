@@ -2,7 +2,4 @@ BiQuyetHanhPhucTrongCongViec,AnnieMcKee,TongHopHCM,KT,ConKho,12,108000.0,3
 VoSiDao,InazoNitobe,DanTri,VH,ConKho,12,109000.0,1
 SuDungTriTueCuaBan,LeHuyLam,TongHopHCM,KT,ConKho,2,136000.0,1
 SuDungTriNhoCuaBan,LeHuyLam,TongHopHCM,KT,conkho,3,177000.0,1
-Book1,tg,NXB,VH,t,23,100000.0,2
-Xin,Chao,NXB,dd,d,12,100000.0,2
 Ketoan,TG,NXD,d,d,12,1333333.0,12
-2,Tr,qwe,d,12,13,190000.0,2
