@@ -1,5 +1,6 @@
 package library.iooperation;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import library.book.Book;
@@ -18,18 +19,24 @@ public class PlaceOrder implements IOOperation{
         int index = dataBase.getBookIndex(bookTitle);
         boolean  isBookNotExist = index<=-1;
         if (isBookNotExist) {
-            System.out.println("Sach ban nhap trong co!!!");
+            System.out.println("Sach ban nhap khong co!!!");
         } else{
             Book bookUserOrder = dataBase.getBook(bookTitle);
             order.setBook(bookUserOrder);
             order.setUser(user);
+            int userPlaceOrderQuatity = scanner.nextInt();
             System.out.println("Hien tai sach "+bookTitle+" con "+ bookUserOrder.getQuatity());
             System.out.println("Hay Nhap so luong ban muon dat: ");
-            
-            // order.setQuatity(quantity);
-
+            order.setQuatity(userPlaceOrderQuatity);
+            double bookOrderFee =userPlaceOrderQuatity*bookUserOrder.getPrice(); 
+            order.setPrice(bookOrderFee);
+            try {
+                dataBase.addOrder(order);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
+        user.menu(dataBase,user);
     }
     
 }
