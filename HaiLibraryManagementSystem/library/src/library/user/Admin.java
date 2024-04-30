@@ -1,10 +1,7 @@
 package library.user;
-
 import java.util.Scanner;
-
 import library.database.DataBase;
 import library.iooperation.*;
-
 public class Admin extends User {
 
     private IOOperation[] operations;

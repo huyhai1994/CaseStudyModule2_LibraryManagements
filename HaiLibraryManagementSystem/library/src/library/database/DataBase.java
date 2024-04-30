@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import library.user.*;
-import library.book.*;;
+import library.book.*;
 
 public class DataBase {
     public static final String USERS_FILE_PATH = "src/library/database/users.txt";
@@ -16,7 +16,7 @@ public class DataBase {
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<String> usernames = new ArrayList<String>();
     private ArrayList<Book> books = new ArrayList<Book>();
-    private ArrayList<String> booknames = new ArrayList<>();
+    private ArrayList<String> booknames = new ArrayList<String>();
     private File usersFile;
     private File booksFile;
 
@@ -71,6 +71,36 @@ public class DataBase {
         System.out.println("Name | PhoneNumber | Email | Role");
         for (User user : users) {
             System.out.println(user);
+        }
+
+    }
+
+    public ArrayList<Book> getAllBooks() {
+        return books;
+    }
+
+    public int getIndexOfBook(String bookName) {
+        int index = -1;
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(bookName)) {
+                index = books.indexOf(book);
+                System.out.println(index);
+            }
+        }
+        return index;
+    }
+
+    public void deleteBook(int index) {
+        System.out.println("Vi tri cua sach " + index);
+        System.out.println("Dang xoa sach...");
+        books.remove(index);
+        // booknames.remove(index);
+        System.out.println("da xoa khoi danh sach");
+        showBooks();
+        try {
+            this.writeBookInformationsToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
