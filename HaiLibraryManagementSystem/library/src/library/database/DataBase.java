@@ -80,6 +80,16 @@ public class DataBase {
         return this.users.get(indexOfUser);
     }
 
+    public User getUser(String userName) {
+
+        for (User user : users) {
+            if (user.getName().equalsIgnoreCase(userName)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public void showUsers() {
         System.out.println("Name | PhoneNumber | Email | Role");
         for (User user : users) {
@@ -93,6 +103,16 @@ public class DataBase {
 
     public Book getBook(int index) {
         return this.books.get(index);
+    }
+
+    public Book getBook(String bookTitle) {
+
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(bookTitle)) {
+                return book;
+            }
+        }
+        return null;
     }
 
     public int getIndexOfBook(String bookName) {
@@ -131,15 +151,16 @@ public class DataBase {
                 System.out.println(e.getMessage());
             }
         }
-        if (ordersFile.exists()){
-            try{
+        if (ordersFile.exists()) {
+            try {
                 ordersFile.delete();
-            } catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
     }
-    public void createNewDataFile(){
+
+    public void createNewDataFile() {
         try {
             usersFile.createNewFile();
             booksFile.createNewFile();
@@ -152,7 +173,7 @@ public class DataBase {
 
     public void showBooks() {
         System.out.println(
-                "      Tieu De    |  Tac Gia      |     NXB   | Vi Tri | TT | S.Luong | Gia | SLMuon");
+                "Tieu De|Tac Gia|NXB| Vi Tri |TT|S.Luong|Gia| SLMuon");
         for (Book book : books) {
             System.out.println(book);
         }
@@ -246,7 +267,7 @@ public class DataBase {
         return bookExtractFromFile;
     }
 
-    private void writeBookInformationsToFile() throws IOException {
+    public void writeBookInformationsToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(BOOKS_FILE_PATH);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         try {
@@ -274,8 +295,9 @@ public class DataBase {
         this.writeBookInformationsToFile();
     }
 
-    public void addOrder(Order order) {
+    public void addOrder(Order order) throws IOException {
         orders.add(order);
+        this.writeOrderInformationToFile();
     }
 
     public void writeOrderInformationToFile() throws IOException {
@@ -297,27 +319,42 @@ public class DataBase {
     }
 
     private void readOrderInformationsFromFile() {
-        // try {
-        // FileReader fileReader = new FileReader(ORDERS_FILE_PATH);
-        // BufferedReader bufferedReader = new BufferedReader(fileReader);
-        // String line;
-        // try {
-        // while ((line = bufferedReader.readLine()) != null) {
-        // String[] txt = line.split(",");
-        // String book= txt[0];
-        // String user = txt[1];
-        // String price= txt[2];
-        // String quatity = txt[3];
-        // Order orderExtractFromFile = new Order(book,user,price,quatity);
-        // this.orders.add(orderExtractFromFile);
-        // }
-        // bufferedReader.close();
-        // } catch (Exception e) {
-        // System.out.println(e.getMessage());
-        // }
+        try {
+            FileReader fileReader = new FileReader(ORDERS_FILE_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            try {
+                while ((line = bufferedReader.readLine()) != null) {
+                    Order orderExtractFromFile = parseOrder(line);
+                    this.orders.add(orderExtractFromFile);
+                }
+                bufferedReader.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
-        // } catch (IOException e) {
-        // System.out.println(e.getMessage());
-        // }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    private Order parseOrder(String line){
+        String[] txt = line.split(",");
+                    String bookName = txt[0];
+                    String userName = txt[1];
+                    String price = txt[2];
+                    String quatity = txt[3];
+                    Book book = this.getBook(bookName);
+                    User user = this.getUser(userName);
+                    Order orderExtractFromFile = new Order(book, user, 
+                                            Double.parseDouble(price),
+                                            Integer.parseInt(quatity));
+        return orderExtractFromFile;
+    }
+
+    public void showOrders() {
+        System.out.println();
+        for (Order order : orders) {
+            System.out.println(order);
+        }
     }
 }

@@ -39,7 +39,6 @@ public class NormalUser extends User {
                 new ReturnBook(),
                 new Exit()
         };
-
     }
 
     @Override
