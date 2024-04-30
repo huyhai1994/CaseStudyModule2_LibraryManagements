@@ -78,7 +78,8 @@ public class DataBase {
     public ArrayList<Book> getAllBooks() {
         return this.books;
     }
-    public  Book getBook(int index){
+
+    public Book getBook(int index) {
         return this.books.get(index);
     }
 
@@ -100,6 +101,24 @@ public class DataBase {
             this.writeBookInformationsToFile();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void deleteAllData(){
+        if(usersFile.exists()){
+            try{
+                usersFile.delete();
+                usersFile.createNewFile();
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        if (booksFile.exists()) {
+            try{
+                booksFile.delete();
+                booksFile.createNewFile();
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
