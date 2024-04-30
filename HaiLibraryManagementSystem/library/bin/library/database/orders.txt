@@ -1,1 +1,3 @@
-VoSiDao|InazoNitobe|DanTri|VH|ConKho|12|109000.0|1,Nam|0586465664|nguyennam92@gmail.com|normalUser,0.0,0
+null,null,0.0,0
+null,null,218000.0,2
+VoSiDao|InazoNitobe|DanTri|VH|ConKho|12|109000.0|1,Nam|nguyennam92@gmail.com|0586465664|normalUser,545000.0,5

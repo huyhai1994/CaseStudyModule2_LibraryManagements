@@ -53,15 +53,15 @@ public class NormalUser extends User {
     @Override
     public void menu(DataBase dataBase, User user) {
 
-        System.out.println("Here is normal user menu");
+        System.out.println("Day la menu cua anh/chi "+user.getName());
         System.out.println("------------------------");
-        System.out.println("1. View Books");
-        System.out.println("2. Search Book");
-        System.out.println("3. Place Order");
-        System.out.println("4. Borrow Book");
-        System.out.println("5. Calculate Fine");
-        System.out.println("6. Return Book");
-        System.out.println("7. Exit");
+        System.out.println("1. Hien Thi Tat Ca Sach ");
+        System.out.println("2. Tim Sach Theo Ten");
+        System.out.println("3. Dat Sach");
+        System.out.println("4. Muon Sach");
+        System.out.println("5. Tinh Toan Chi Phi");
+        System.out.println("6. Hoan Tra Sach ");
+        System.out.println("7. Dang Xuat");
 
         Scanner scanner = new Scanner(System.in);
         int normalUserChoise = scanner.nextInt();

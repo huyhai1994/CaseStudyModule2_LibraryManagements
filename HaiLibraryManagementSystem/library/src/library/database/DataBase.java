@@ -304,8 +304,9 @@ public class DataBase {
         this.writeBookInformationsToFile();
     }
 
-    public void addOrder(Order order) throws IOException {
+    public void addOrder(Order order, Book book, int bookIndex) throws IOException {
         orders.add(order);
+        books.set(bookIndex, book);
         this.writeOrderInformationToFile();
     }
 
@@ -365,5 +366,8 @@ public class DataBase {
         for (Order order : orders) {
             System.out.println(order);
         }
+    }
+    public ArrayList<Order> getAllOrders(){
+        return orders;
     }
 }
