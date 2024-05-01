@@ -2,31 +2,42 @@ package library.iooperation;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 import library.book.Book;
 import library.user.User;
+
 public class Borrowing {
-    public static final int MAX_DAY_TO_BORROW = 14;
+    public static final int MAX_DAYS_TO_BORROW = 14;
     private LocalDate startingDate;
     private LocalDate finishingDate;
     private int daysLeft;
     private Book book;
     private User user;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Borrowing() {
     }
 
     public Borrowing(Book book, User user) {
         this.startingDate = LocalDate.now();
-        this.finishingDate = startingDate.plusDays(MAX_DAY_TO_BORROW);
+        this.finishingDate = startingDate.plusDays(MAX_DAYS_TO_BORROW);
         Period period = Period.between(startingDate, finishingDate);
         this.daysLeft = period.getDays();
         this.book = book;
         this.user = user;
     }
 
+    public String getStart() {
+        return formatter.format(startingDate);
+    }
+
     public LocalDate getStartingDate() {
         return this.startingDate;
+    }
+
+    public String getFinish() {
+        return formatter.format(finishingDate);
     }
 
     public void setStartingDate(LocalDate startingDate) {
@@ -42,7 +53,7 @@ public class Borrowing {
     }
 
     public int getDaysLeft() {
-        return this.daysLeft;
+        return Period.between(startingDate, finishingDate).getDays();
     }
 
     public void setDaysLeft(int daysLeft) {
@@ -92,12 +103,8 @@ public class Borrowing {
 
     @Override
     public String toString() {
-        return "{" +
-            " startingDate='" + getStartingDate() + "'" +
-            ", finishingDate='" + getFinishingDate() + "'" +
-            ", daysleft='" + getDaysLeft() + "'" +
-            ", book='" + getBook() + "'" +
-            ", user='" + getUser() + "'" +
-            "}";
+        return "Thoi Han muon sach: " + startingDate +
+                "\n Ngay den han tra: " + finishingDate +
+                "\n ngay con lai: " + daysLeft;
     }
 }
