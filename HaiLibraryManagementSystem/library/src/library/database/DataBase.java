@@ -315,8 +315,8 @@ public class DataBase {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         try {
             for (Order order : orders) {
-                String line = order.getBook() + "," +
-                        order.getUser() + "," +
+                String line = order.getBook().getTitle() + "," +
+                        order.getUser().getName() + "," +
                         order.getPrice() + "," +
                         order.getQuatity();
                 bufferedWriter.write(line);

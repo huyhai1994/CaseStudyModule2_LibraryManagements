@@ -1,5 +1,6 @@
 BiQuyetHanhPhucTrongCongViec,AnnieMcKee,TongHopHCM,KT,ConKho,12,108000.0,3
 VoSiDao,InazoNitobe,DanTri,VH,ConKho,12,109000.0,1
-SuDungTriTueCuaBan,LeHuyLam,TongHopHCM,KT,ConKho,2,136000.0,1
+SuDungTriTueCuaBan,LeHuyLam,TongHopHCM,KT,ConKho,40,136000.0,1
 SuDungTriNhoCuaBan,LeHuyLam,TongHopHCM,KT,conkho,3,177000.0,1
-PhaKen,TieuDa,ThanhNien,KNS,ConKho,12,110000.0,1
+PhaKen,TieuDa,ThanhNien,KNS,ConKho,2,110000.0,1
+DontMakeMeThink,SteveKrug,English,NV,conkho,20,200000.0,0

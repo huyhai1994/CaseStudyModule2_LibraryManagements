@@ -35,8 +35,9 @@ public class PlaceOrder implements IOOperation {
                 dataBase.addOrder(order, bookUserOrder, bookUserOrderIndex);
                 System.out.println("Sach da duoc dat thanh cong...");
                 int updateBookUserOrderQuatity = bookUserOrder.getQuatity() - userPlaceOrderQuatity;
-                System.out.println("Hien tai sach " + bookTitle + " con " + bookUserOrder.getQuatity());
+                System.out.println("Hien tai sach " + bookTitle + " con " + updateBookUserOrderQuatity);
                 bookUserOrder.setQuatity(updateBookUserOrderQuatity);
+                dataBase.writeBookInformationsToFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
