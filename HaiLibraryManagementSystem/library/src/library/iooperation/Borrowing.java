@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import library.book.Book;
 import library.user.User;
 
+
 public class Borrowing {
     public static final int MAX_DAYS_TO_BORROW = 14;
     private LocalDate startingDate;
@@ -26,6 +27,14 @@ public class Borrowing {
         this.daysLeft = period.getDays();
         this.book = book;
         this.user = user;
+    }
+    public Borrowing (LocalDate startingDate, LocalDate finishingDate, Book book, User user){
+        this.startingDate = startingDate;
+        this.finishingDate = finishingDate;
+        this.book = book;
+        this.user = user;
+        this.daysLeft = Period.between(startingDate, finishingDate).getDays();
+
     }
 
     public String getStart() {

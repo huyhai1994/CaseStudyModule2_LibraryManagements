@@ -6,35 +6,46 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import library.user.Admin;
 import library.user.NormalUser;
 import library.user.User;
 import library.book.Book;
+import library.iooperation.Borrowing;
 import library.order.Order;
 
 public class DataBase {
     public static final String USERS_FILE_PATH = "src/library/database/users.txt";
     public static final String BOOKS_FILE_PATH = "src/library/database/books.txt";
     public static final String ORDERS_FILE_PATH = "src/library/database/orders.txt";
+    public static final String BORROWINGS_FILE_PATH = "src/library/database/borrowings.txt";
+
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<String> usernames = new ArrayList<String>();
     private ArrayList<Book> books = new ArrayList<Book>();
     private ArrayList<String> booknames = new ArrayList<String>();
     private ArrayList<Order> orders = new ArrayList<Order>();
+    private ArrayList<Borrowing> borrowings = new ArrayList<Borrowing>();
+
     private File usersFile;
     private File booksFile;
     private File ordersFile;
+    private File borrowingsFile;
 
     public DataBase() {
         try {
             usersFile = new File(USERS_FILE_PATH);
             booksFile = new File(BOOKS_FILE_PATH);
             ordersFile = new File(ORDERS_FILE_PATH);
+
             boolean usersFileNotExist = !usersFile.exists();
             boolean booksFileNotExist = !booksFile.exists();
             boolean ordersFileNotExist = !ordersFile.exists();
+            boolean borrowingsFileNotExist = !borrowingsFile.exists();
+
             if (usersFileNotExist) {
                 usersFile.createNewFile();
             }
@@ -42,11 +53,17 @@ public class DataBase {
                 booksFile.createNewFile();
             }
             if (ordersFileNotExist) {
-                booksFile.createNewFile();
+                ordersFile.createNewFile();
             }
+            if (borrowingsFileNotExist) {
+                borrowingsFile.createNewFile();
+            }
+
             this.readUserInformationsFromFile();
             this.readBookInformationsFromFile();
             this.readOrderInformationsFromFile();
+            this.readBorrowingInformationsFromFile();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -69,7 +86,7 @@ public class DataBase {
 
             if (isInputEmailMatchedWithDataBaseUser &&
                     isInputPhoneNumberMatchedWithDataBaseUser) {
-                System.out.println("User exists!!!");
+                System.out.println("Tai Khoan ton tai!!!");
                 indexOfUser = users.indexOf(user);
             }
         }
@@ -91,7 +108,7 @@ public class DataBase {
     }
 
     public void showUsers() {
-        System.out.println("Name | PhoneNumber | Email | Role");
+        System.out.println("   Ten   |      SDT    |      Email    | Vai Tro");
         for (User user : users) {
             System.out.println(user);
         }
@@ -114,11 +131,12 @@ public class DataBase {
         }
         return null;
     }
-    public int getBookIndex(String bookTitle){
+
+    public int getBookIndex(String bookTitle) {
         int index = -1;
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(bookTitle)) {
-                index  = books.indexOf(book);
+                index = books.indexOf(book);
             }
         }
         return index;
@@ -328,7 +346,7 @@ public class DataBase {
         }
     }
 
-    private void readOrderInformationsFromFile() {
+    public void readOrderInformationsFromFile() {
         try {
             FileReader fileReader = new FileReader(ORDERS_FILE_PATH);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -347,17 +365,18 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
     }
-    private Order parseOrder(String line){
+
+    private Order parseOrder(String line) {
         String[] txt = line.split(",");
-                    String bookName = txt[0];
-                    String userName = txt[1];
-                    String price = txt[2];
-                    String quatity = txt[3];
-                    Book book = this.getBook(bookName);
-                    User user = this.getUser(userName);
-                    Order orderExtractFromFile = new Order(book, user, 
-                                            Double.parseDouble(price),
-                                            Integer.parseInt(quatity));
+        String bookName = txt[0];
+        String userName = txt[1];
+        String price = txt[2];
+        String quatity = txt[3];
+        Book book = this.getBook(bookName);
+        User user = this.getUser(userName);
+        Order orderExtractFromFile = new Order(book, user,
+                Double.parseDouble(price),
+                Integer.parseInt(quatity));
         return orderExtractFromFile;
     }
 
@@ -367,7 +386,79 @@ public class DataBase {
             System.out.println(order);
         }
     }
-    public ArrayList<Order> getAllOrders(){
+
+    public ArrayList<Order> getAllOrders() {
         return orders;
+    }
+
+    public void writeBorrowingInformationToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(BORROWINGS_FILE_PATH);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try {
+            for (Borrowing borrowing : borrowings) {
+                String line = borrowing.getStart() + "," +
+                        borrowing.getFinish() + "," +
+                        borrowing.getBook().getTitle() + "," +
+                        borrowing.getUser().getName();
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void readBorrowingInformationsFromFile() {
+        try {
+            FileReader fileReader = new FileReader(BORROWINGS_FILE_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            try {
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    Borrowing borrowingExtractFromFile = parseBorrowing(line);
+                    this.borrowings.add(borrowingExtractFromFile);
+                }
+                bufferedReader.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private Borrowing parseBorrowing(String line) {
+        String[] txt = line.split(",");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate startingDate = LocalDate.parse(txt[0], formatter);
+        LocalDate finishingDate = LocalDate.parse(txt[1], formatter);
+        String bookName = txt[2];
+        String userName = txt[3];
+        Book book = this.getBook(bookName);
+        User user = this.getUser(userName);
+        Borrowing borrowingExtractFromFile = new Borrowing(startingDate, finishingDate, book, user);
+        return borrowingExtractFromFile;
+    }
+
+    public void borrowingBook(Borrowing borrowing, Book book, int bookIndex) {
+        borrowings.add(borrowing);
+        books.set(bookIndex,book);
+        try {
+            this.writeBorrowingInformationToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.writeBookInformationsToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Borrowing> getBorrowings(){
+        return borrowings;
     }
 }
