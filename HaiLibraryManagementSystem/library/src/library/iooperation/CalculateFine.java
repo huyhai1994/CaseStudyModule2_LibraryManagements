@@ -20,19 +20,18 @@ public class CalculateFine implements IOOperation {
                     .equalsIgnoreCase(user.getName());
             if (isUserNameMatchesDatabaseStoredUserName &&
                     isInputBorrowingBookTitleMatchesDatabaseStoredBookTitle) {
-                checkingAndPrintStatusIfBorrowingDaysPassedReturnDays(borrowing.getDaysLeft());
+                checkingAndPrintTheStatusIfBorrowingDaysPassedReturnDays(borrowing.getDaysLeft());
             }
             user.menu(dataBase, user);
         }
     }
 
-    public static void checkingAndPrintStatusIfBorrowingDaysPassedReturnDays(int daylefts) {
+    public static void checkingAndPrintTheStatusIfBorrowingDaysPassedReturnDays(int daylefts) {
         boolean isReturnDaysPass = daylefts < 0;
         if (isReturnDaysPass) {
             System.out.println("Ban da cham tra! " +
                     "ban phai tra tien phi cham : " +
                      Math.abs(daylefts) * MAX_LATE_FINE_PER_DAY_IN_DONGS);
-
         } else {
             System.out.println("Ban khong can phai tra tien phi cham!!!");
         }

@@ -477,7 +477,7 @@ public class DataBase {
         return borrowings;
     }
 
-    public void BorrowBook(Borrowing borrowing, Book book, int bookindex){
+    public void BorrowBook(Borrowing borrowing, Book book, int bookindex) {
         borrowings.add(borrowing);
         books.set(bookindex, book);
         try {
@@ -491,4 +491,20 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+
+    public void returnBook(Borrowing borrowing, Book book, int bookIndex) {
+        borrowings.remove(borrowing);
+        books.set(bookIndex, book);
+        try {
+            this.writeBorrowingInformationToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.writeBookInformationsToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
