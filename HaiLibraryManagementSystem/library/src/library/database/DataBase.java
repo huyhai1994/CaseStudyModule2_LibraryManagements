@@ -18,10 +18,11 @@ import library.iooperation.Borrowing;
 import library.order.Order;
 
 public class DataBase {
-    public static final String USERS_FILE_PATH = "src/library/database/users.txt";
-    public static final String BOOKS_FILE_PATH = "src/library/database/books.txt";
-    public static final String ORDERS_FILE_PATH = "src/library/database/orders.txt";
-    public static final String BORROWINGS_FILE_PATH = "src/library/database/borrowings.txt";
+
+    public static final String USERS_FILE_PATH = "users.txt";
+    public static final String BOOKS_FILE_PATH = "books.txt";
+    public static final String ORDERS_FILE_PATH = "orders.txt";
+    public static final String BORROWINGS_FILE_PATH = "borrowings.txt";
 
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<String> usernames = new ArrayList<String>();
@@ -165,6 +166,7 @@ public class DataBase {
     }
 
     public void deleteAllData() {
+
         boolean isUserFileExist = usersFile.exists();
         boolean isBookFileExist = booksFile.exists();
         boolean isOrderFileExist = ordersFile.exists();
@@ -193,7 +195,7 @@ public class DataBase {
         }
         if (isBorrowingFileExist) {
             try {
-             borrowingsFile.delete();   
+                borrowingsFile.delete();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -458,7 +460,7 @@ public class DataBase {
 
     public void borrowingBook(Borrowing borrowing, Book book, int bookIndex) {
         borrowings.add(borrowing);
-        books.set(bookIndex,book);
+        books.set(bookIndex, book);
         try {
             this.writeBorrowingInformationToFile();
         } catch (IOException e) {
@@ -471,7 +473,7 @@ public class DataBase {
         }
     }
 
-    public ArrayList<Borrowing> getBorrowings(){
+    public ArrayList<Borrowing> getBorrowings() {
         return borrowings;
     }
 }

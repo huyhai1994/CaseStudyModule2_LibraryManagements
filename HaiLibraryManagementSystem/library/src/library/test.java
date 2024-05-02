@@ -5,7 +5,7 @@ import library.database.DataBase;
 import library.order.Order;
 public class test {
     public static void main(String[] args) throws IOException {
-        String ORDERS_FILE_PATH = "src/library/database/orders.txt";
+        String ORDERS_FILE_PATH = "database/orders.txt";
         File file = new File(ORDERS_FILE_PATH);
         boolean isFileExist = file.exists();
         boolean isFileNotExist = !isFileExist;
