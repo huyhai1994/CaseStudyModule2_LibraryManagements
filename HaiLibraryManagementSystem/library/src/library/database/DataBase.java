@@ -40,6 +40,7 @@ public class DataBase {
             usersFile = new File(USERS_FILE_PATH);
             booksFile = new File(BOOKS_FILE_PATH);
             ordersFile = new File(ORDERS_FILE_PATH);
+            borrowingsFile = new File(BORROWINGS_FILE_PATH);
 
             boolean usersFileNotExist = !usersFile.exists();
             boolean booksFileNotExist = !booksFile.exists();
@@ -164,23 +165,35 @@ public class DataBase {
     }
 
     public void deleteAllData() {
-        if (usersFile.exists()) {
+        boolean isUserFileExist = usersFile.exists();
+        boolean isBookFileExist = booksFile.exists();
+        boolean isOrderFileExist = ordersFile.exists();
+        boolean isBorrowingFileExist = borrowingsFile.exists();
+
+        if (isUserFileExist) {
             try {
                 usersFile.delete();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        if (booksFile.exists()) {
+        if (isBookFileExist) {
             try {
                 booksFile.delete();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        if (ordersFile.exists()) {
+        if (isOrderFileExist) {
             try {
                 ordersFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        if (isBorrowingFileExist) {
+            try {
+             borrowingsFile.delete();   
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

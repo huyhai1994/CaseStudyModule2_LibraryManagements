@@ -1,6 +1,1 @@
-hai,0392260046,nguyenhuyhai926@gmail.com,admin
-Nam,01,nguyennam92@gmail.com,normalUser
-Thuong,02,lethuong543@gmail.com,normalUser
-Trinh,03,MaiTrinh45@gmail.com,normalUser
-Thang,06,ThangDT98@gmail.com,normalUser
-Tao,05,Tao05@gmail.com,normalUser
+thuong,089,nguyenthuong21,normalUser

@@ -12,8 +12,5 @@ public class CalculateFine implements IOOperation{
         System.out.println("Xin hay nhap tieu de sach: ");
         Scanner scanner = new Scanner(System.in);
         String bookTitle = scanner.nextLine();
-        
-
     }
-    
 }
