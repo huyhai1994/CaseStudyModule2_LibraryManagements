@@ -1,6 +1,5 @@
 package library.iooperation;
 import java.util.Scanner;
-
 import library.book.Book;
 import library.database.DataBase;
 import library.user.*;
@@ -28,7 +27,6 @@ public class BorrowBook implements IOOperation {
             } else{
                 System.out.println("Quyen sach nay khong con de muon nua...");
             }
-           
         } else {
             System.out.println("Khong tim thay sach!!!");
         }

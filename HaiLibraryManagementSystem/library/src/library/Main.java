@@ -77,7 +77,7 @@ public class Main {
     }
 
     public static int setOptions() {
-        System.out.println("1. Dang Nhap \n 2. Tao Tai Khoan Moi\nNhan 0 de thoat\n");
+        System.out.println("1. Dang Nhap \n2. Tao Tai Khoan Moi\n <<Nhan 0 de thoat>>\n");
         scanner = new Scanner(System.in);
         int options = scanner.nextInt();
         return options;

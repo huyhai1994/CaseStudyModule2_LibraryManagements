@@ -1,1 +1,3 @@
-hai,asd,12323,admin
+hai,asd,12323,NormalUser
+hai,0392260046,nguyenhuyhai926@gmail.com,admin
+Tien,01,NguyenTien@gmail.com,normalUser
