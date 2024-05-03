@@ -12,7 +12,7 @@ public class Search implements IOOperation {
         System.out.println("Nhap ten sach ban muon tim: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
-        int index = dataBase.getIndexOfBook(name);
+        int index = dataBase.getBookIndex(name);
         boolean isBookFound = index != -1;
         if (isBookFound) {
             System.out.println(dataBase.getBook(index).toString());

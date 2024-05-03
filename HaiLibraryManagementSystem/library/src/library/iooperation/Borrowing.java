@@ -34,7 +34,6 @@ public class Borrowing {
         this.book = book;
         this.user = user;
         this.daysLeft = Period.between(startingDate, finishingDate).getDays();
-
     }
 
     public String getStart() {

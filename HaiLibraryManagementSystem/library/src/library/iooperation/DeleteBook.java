@@ -12,7 +12,7 @@ public class DeleteBook implements IOOperation{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhap tieu de sach de xoa: ");
         String bookName = scanner.next();
-        int index = dataBase.getIndexOfBook(bookName);
+        int index = dataBase.getBookIndex(bookName);
         boolean isBookFound = index!=-1;
         if (isBookFound) {
             dataBase.deleteBook(index);

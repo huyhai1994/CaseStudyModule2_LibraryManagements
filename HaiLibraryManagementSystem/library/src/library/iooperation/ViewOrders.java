@@ -13,7 +13,7 @@ public class ViewOrders implements IOOperation {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhap tieu de sach: ");
         String bookTitle = scanner.next();
-        int index = dataBase.getIndexOfBook(bookTitle);
+        int index = dataBase.getBookIndex(bookTitle);
         boolean isBookFound = index != -1;
         if (isBookFound) {
             for (Order order : dataBase.getAllOrders()) {
@@ -30,5 +30,4 @@ public class ViewOrders implements IOOperation {
         System.out.println(" ");
         user.menu(dataBase, user);
     }
-
 }

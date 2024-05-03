@@ -25,9 +25,9 @@ public class DataBase {
     public static final String BORROWINGS_FILE_PATH = "borrowings.txt";
 
     private ArrayList<User> users = new ArrayList<User>();
-    private ArrayList<String> usernames = new ArrayList<String>();
+    private ArrayList<String> userNames = new ArrayList<String>();
     private ArrayList<Book> books = new ArrayList<Book>();
-    private ArrayList<String> booknames = new ArrayList<String>();
+    private ArrayList<String> bookNames = new ArrayList<String>();
     private ArrayList<Order> orders = new ArrayList<Order>();
     private ArrayList<Borrowing> borrowings = new ArrayList<Borrowing>();
 
@@ -71,10 +71,16 @@ public class DataBase {
         }
     }
 
-    public void addUser(User user) throws IOException {
-        this.users.add(user);
-        this.usernames.add(user.getName());
-        this.writeUserInformationsToFile();
+    public void createNewDataFile() {
+        try {
+            usersFile.createNewFile();
+            booksFile.createNewFile();
+            ordersFile.createNewFile();
+            borrowingsFile.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int checkLogin(String phoneNumber, String email) {
@@ -95,6 +101,69 @@ public class DataBase {
         return indexOfUser;
     }
 
+    public void addUser(User user) throws IOException {
+        this.users.add(user);
+        this.userNames.add(user.getName());
+        this.writeUserInformationsToFile();
+    }
+
+    private void writeUserInformationsToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(USERS_FILE_PATH);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try {
+            for (User user : users) {
+                String line = user.getName() + "," +
+                        user.getPhoneNumber() + "," +
+                        user.getEmail() + "," +
+                        user.getRole();
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void readUserInformationsFromFile() {
+        try {
+            FileReader fileReader = new FileReader(USERS_FILE_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            try {
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] txt = line.split(",");
+                    String nameUser = txt[0];
+                    String phoneUser = txt[1];
+                    String emailUser = txt[2];
+                    String roleUser = txt[3];
+                    if (roleUser.equalsIgnoreCase("admin")) {
+                        User userExtractFromFile = new Admin(nameUser, phoneUser, emailUser, roleUser);
+                        this.users.add(userExtractFromFile);
+                        this.userNames.add(userExtractFromFile.getName());
+                    } else if (roleUser.equalsIgnoreCase("normaluser")) {
+                        User userExtractFromFile = new NormalUser(nameUser, phoneUser, emailUser, roleUser);
+                        this.users.add(userExtractFromFile);
+                    }
+
+                }
+                bufferedReader.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void showUsers() {
+        System.out.println("   Ten   |      SDT    |      Email    | Vai Tro");
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
     public User getUser(int indexOfUser) {
         return this.users.get(indexOfUser);
     }
@@ -109,10 +178,77 @@ public class DataBase {
         return null;
     }
 
-    public void showUsers() {
-        System.out.println("   Ten   |      SDT    |      Email    | Vai Tro");
-        for (User user : users) {
-            System.out.println(user);
+    public void addBook(Book book) throws IOException {
+        this.books.add(book);
+        this.bookNames.add(book.getTitle());
+        this.writeBookInformationsToFile();
+    }
+
+    public void writeBookInformationsToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(BOOKS_FILE_PATH);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try {
+            for (Book book : books) {
+                String line = book.getTitle() + "," +
+                        book.getAuthor() + "," +
+                        book.getPublisher() + "," +
+                        book.getCollectionLocation() + "," +
+                        book.getBorrowingStatus() + "," +
+                        book.getQuatity() + "," +
+                        book.getPrice() + "," +
+                        book.getBorrowingCopies();
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void readBookInformationsFromFile() {
+        try {
+            FileReader fileReader = new FileReader(BOOKS_FILE_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            try {
+                while ((line = bufferedReader.readLine()) != null) {
+                    Book bookExtractFromFile = parseBook(line);
+                    bookExtractFromFile.toString();
+                    this.books.add(bookExtractFromFile);
+                    this.bookNames.add(bookExtractFromFile.getTitle());
+                }
+                bufferedReader.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private Book parseBook(String line) {
+        String[] text = line.split(",");
+        String title = text[0];
+        String author = text[1];
+        String publisher = text[2];
+        String collectionLocation = text[3];
+        String borrowingStatus = text[4];
+        String quatity = text[5];
+        String price = text[6];
+        String borrowingCopies = text[7];
+        Book bookExtractFromFile = new Book(title, author, publisher,
+                collectionLocation, borrowingStatus, Integer.parseInt(quatity),
+                Double.parseDouble(price), Integer.parseInt(borrowingCopies));
+        return bookExtractFromFile;
+    }
+
+    public void showBooks() {
+        System.out.println(
+                "Tieu De|Tac Gia|NXB| Vi Tri |TT|S.Luong|Gia| SLMuon");
+        for (Book book : books) {
+            System.out.println(book);
         }
     }
 
@@ -144,197 +280,14 @@ public class DataBase {
         return index;
     }
 
-    public int getIndexOfBook(String bookName) {
-        int index = -1;
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(bookName)) {
-                index = books.indexOf(book);
-                System.out.println(index);
-            }
-        }
-        return index;
-    }
-
     public void deleteBook(int index) {
         this.books.remove(index);
-        this.booknames.remove(index);
+        this.bookNames.remove(index);
         try {
             this.writeBookInformationsToFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void deleteAllData() {
-
-        boolean isUserFileExist = usersFile.exists();
-        boolean isBookFileExist = booksFile.exists();
-        boolean isOrderFileExist = ordersFile.exists();
-        boolean isBorrowingFileExist = borrowingsFile.exists();
-
-        if (isUserFileExist) {
-            try {
-                usersFile.delete();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        if (isBookFileExist) {
-            try {
-                booksFile.delete();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        if (isOrderFileExist) {
-            try {
-                ordersFile.delete();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        if (isBorrowingFileExist) {
-            try {
-                borrowingsFile.delete();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public void createNewDataFile() {
-        try {
-            usersFile.createNewFile();
-            booksFile.createNewFile();
-            ordersFile.createNewFile();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showBooks() {
-        System.out.println(
-                "Tieu De|Tac Gia|NXB| Vi Tri |TT|S.Luong|Gia| SLMuon");
-        for (Book book : books) {
-            System.out.println(book);
-        }
-    }
-
-    private void readUserInformationsFromFile() {
-        try {
-            FileReader fileReader = new FileReader(USERS_FILE_PATH);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            try {
-                while ((line = bufferedReader.readLine()) != null) {
-                    String[] txt = line.split(",");
-                    String nameUser = txt[0];
-                    String phoneUser = txt[1];
-                    String emailUser = txt[2];
-                    String roleUser = txt[3];
-                    if (roleUser.equalsIgnoreCase("admin")) {
-                        User userExtractFromFile = new Admin(nameUser, phoneUser, emailUser, roleUser);
-                        this.users.add(userExtractFromFile);
-                        this.usernames.add(userExtractFromFile.getName());
-                    } else if (roleUser.equalsIgnoreCase("normaluser")) {
-                        User userExtractFromFile = new NormalUser(nameUser, phoneUser, emailUser, roleUser);
-                        this.users.add(userExtractFromFile);
-                    }
-
-                }
-                bufferedReader.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void writeUserInformationsToFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(USERS_FILE_PATH);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        try {
-            for (User user : users) {
-                String line = user.getName() + "," +
-                        user.getPhoneNumber() + "," +
-                        user.getEmail() + "," +
-                        user.getRole();
-                bufferedWriter.write(line);
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void readBookInformationsFromFile() {
-        try {
-            FileReader fileReader = new FileReader(BOOKS_FILE_PATH);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            try {
-                while ((line = bufferedReader.readLine()) != null) {
-                    Book bookExtractFromFile = parseBook(line);
-                    bookExtractFromFile.toString();
-                    this.books.add(bookExtractFromFile);
-                    this.booknames.add(bookExtractFromFile.getTitle());
-                }
-                bufferedReader.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private Book parseBook(String line) {
-        String[] text = line.split(",");
-        String title = text[0];
-        String author = text[1];
-        String publisher = text[2];
-        String collectionLocation = text[3];
-        String borrowingStatus = text[4];
-        String quatity = text[5];
-        String price = text[6];
-        String borrowingCopies = text[7];
-        Book bookExtractFromFile = new Book(title, author, publisher,
-                collectionLocation, borrowingStatus, Integer.parseInt(quatity),
-                Double.parseDouble(price), Integer.parseInt(borrowingCopies));
-        return bookExtractFromFile;
-    }
-
-    public void writeBookInformationsToFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(BOOKS_FILE_PATH);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        try {
-            for (Book book : books) {
-                String line = book.getTitle() + "," +
-                        book.getAuthor() + "," +
-                        book.getPublisher() + "," +
-                        book.getCollectionLocation() + "," +
-                        book.getBorrowingStatus() + "," +
-                        book.getQuatity() + "," +
-                        book.getPrice() + "," +
-                        book.getBorrowingCopies();
-                bufferedWriter.write(line);
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void addBook(Book book) throws IOException {
-        this.books.add(book);
-        this.booknames.add(book.getTitle());
-        this.writeBookInformationsToFile();
     }
 
     public void addOrder(Order order, Book book, int bookIndex) throws IOException {
@@ -406,6 +359,21 @@ public class DataBase {
         return orders;
     }
 
+    public void borrowingBook(Borrowing borrowing, Book book, int bookIndex) {
+        borrowings.add(borrowing);
+        books.set(bookIndex, book);
+        try {
+            this.writeBorrowingInformationToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.writeBookInformationsToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void writeBorrowingInformationToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(BORROWINGS_FILE_PATH);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -458,38 +426,8 @@ public class DataBase {
         return borrowingExtractFromFile;
     }
 
-    public void borrowingBook(Borrowing borrowing, Book book, int bookIndex) {
-        borrowings.add(borrowing);
-        books.set(bookIndex, book);
-        try {
-            this.writeBorrowingInformationToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.writeBookInformationsToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public ArrayList<Borrowing> getBorrowings() {
         return borrowings;
-    }
-
-    public void BorrowBook(Borrowing borrowing, Book book, int bookindex) {
-        borrowings.add(borrowing);
-        books.set(bookindex, book);
-        try {
-            this.writeBorrowingInformationToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            this.writeBookInformationsToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void returnBook(Borrowing borrowing, Book book, int bookIndex) {
@@ -504,6 +442,43 @@ public class DataBase {
             this.writeBookInformationsToFile();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void deleteAllData() {
+
+        boolean isUserFileExist = usersFile.exists();
+        boolean isBookFileExist = booksFile.exists();
+        boolean isOrderFileExist = ordersFile.exists();
+        boolean isBorrowingFileExist = borrowingsFile.exists();
+
+        if (isUserFileExist) {
+            try {
+                usersFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        if (isBookFileExist) {
+            try {
+                booksFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        if (isOrderFileExist) {
+            try {
+                ordersFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        if (isBorrowingFileExist) {
+            try {
+                borrowingsFile.delete();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
